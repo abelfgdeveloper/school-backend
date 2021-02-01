@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>2.3.8.RELEASE</version>
+    <relativePath />
+  </parent>
+
+  <groupId>es.abelfgdeveloper.school</groupId>
+  <artifactId>school-parent</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
+
+  <packaging>pom</packaging>
+
+  <modules>
+    <module>school-library-parent</module>
+  </modules>
+
+  <properties>
+    <java.version>11</java.version>
+    <school-parent.version>1.0.0-SNAPSHOT</school-parent.version>
+
+    <!-- SPRING CLOUD PROPERTIES -->
+    <spring-cloud.version>Hoxton.SR9</spring-cloud.version>
+
+    <!-- THRID PARTY PROPERTIES -->
+
+    <!-- PLUGINS PROPERTIES -->
+  </properties>
+
+  <dependencyManagement>
+    <dependencies>
+      <!-- ABELFGDEVELOPER DEPENDENCIES -->
+      <dependency>
+        <groupId>es.abelfgdeveloper.school.library</groupId>
+        <artifactId>school-common</artifactId>
+        <version>${school-parent.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>es.abelfgdeveloper.school.library</groupId>
+        <artifactId>school-test</artifactId>
+        <version>${school-parent.version}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <dependencies>
+    <!-- THRID PARTY DEPENDENCIES -->
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <optional>true</optional>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-maven-plugin</artifactId>
+          <executions>
+            <execution>
+              <goals>
+                <goal>build-info</goal>
+              </goals>
+              <configuration>
+                <additionalProperties>
+                  <parentPomVersion>${school-parent.version}</parentPomVersion>
+                </additionalProperties>
+              </configuration>
+            </execution>
+          </executions>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+
+  <repositories>
+    <repository>
+      <id>spring-milestones</id>
+      <name>Spring Milestones</name>
+      <url>https://repo.spring.io/milestone</url>
+    </repository>
+  </repositories>
+</project>
