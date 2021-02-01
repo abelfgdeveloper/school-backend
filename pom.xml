@@ -20,8 +20,8 @@
   <modules>
     <module>school-library-parent</module>
     <module>school-starter-parent</module>
-	<module>school-server-parent</module>
-	<module>school-service-parent</module>
+    <module>school-server-parent</module>
+    <module>school-service-parent</module>
   </modules>
 
   <properties>
@@ -68,6 +68,16 @@
         <groupId>es.abelfgdeveloper.school.starter</groupId>
         <artifactId>school-test-starter</artifactId>
         <version>${school-parent.version}</version>
+      </dependency>
+
+
+      <!-- SPRING CLOUD DEPENDENCIES -->
+      <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-dependencies</artifactId>
+        <version>${spring-cloud.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
       </dependency>
     </dependencies>
   </dependencyManagement>
