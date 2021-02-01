@@ -16,6 +16,8 @@
   <packaging>pom</packaging>
 
   <modules>
+    <module>school-config-server</module>
+	<module>school-eureka-server</module>
   </modules>
 
 </project>
