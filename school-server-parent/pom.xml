@@ -18,6 +18,7 @@
   <modules>
     <module>school-config-server</module>
 	<module>school-eureka-server</module>
+	<module>school-gateway-server</module>
   </modules>
 
 </project>

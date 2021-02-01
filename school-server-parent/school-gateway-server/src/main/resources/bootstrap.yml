@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: school-gateway-server
+    
+  cloud:
+    config:
+      uri:
+      - http://localhost:8888
+    
