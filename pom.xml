@@ -19,6 +19,7 @@
 
   <modules>
     <module>school-library-parent</module>
+    <module>school-starter-parent</module>
   </modules>
 
   <properties>
@@ -44,6 +45,26 @@
       <dependency>
         <groupId>es.abelfgdeveloper.school.library</groupId>
         <artifactId>school-test</artifactId>
+        <version>${school-parent.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>es.abelfgdeveloper.school.starter</groupId>
+        <artifactId>school-service-jpa-starter</artifactId>
+        <version>${school-parent.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>es.abelfgdeveloper.school.starter</groupId>
+        <artifactId>school-service-starter</artifactId>
+        <version>${school-parent.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>es.abelfgdeveloper.school.starter</groupId>
+        <artifactId>school-test-jpa-starter</artifactId>
+        <version>${school-parent.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>es.abelfgdeveloper.school.starter</groupId>
+        <artifactId>school-test-starter</artifactId>
         <version>${school-parent.version}</version>
       </dependency>
     </dependencies>
