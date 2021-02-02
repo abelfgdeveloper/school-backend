@@ -13,36 +13,23 @@
   <artifactId>school-gateway-server</artifactId>
 
   <dependencies>
+    <!-- ABELFGDEVELOPER DEPENDENCIES -->
+    <dependency>
+      <groupId>es.abelfgdeveloper.school.starter</groupId>
+      <artifactId>school-server-starter</artifactId>
+    </dependency>
+
+    <!-- SPRING CLOUD DEPENDENCIES -->
     <dependency>
       <groupId>org.springframework.cloud</groupId>
       <artifactId>spring-cloud-starter-gateway</artifactId>
     </dependency>
+
+    <!-- TESTS DEPENDENCIES -->
     <dependency>
-      <groupId>org.springframework.cloud</groupId>
-      <artifactId>spring-cloud-starter-config</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework.cloud</groupId>
-      <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-actuator</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework.cloud</groupId>
-      <artifactId>spring-cloud-starter-sleuth</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-test</artifactId>
+      <groupId>es.abelfgdeveloper.school.starter</groupId>
+      <artifactId>school-test-starter</artifactId>
       <scope>test</scope>
-      <exclusions>
-        <exclusion>
-          <groupId>org.junit.vintage</groupId>
-          <artifactId>junit-vintage-engine</artifactId>
-        </exclusion>
-      </exclusions>
     </dependency>
   </dependencies>
 

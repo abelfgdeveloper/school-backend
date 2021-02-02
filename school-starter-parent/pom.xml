@@ -20,6 +20,7 @@
     <module>school-service-starter</module>
 	<module>school-test-jpa-starter</module>
 	<module>school-test-starter</module>
+	<module>school-server-starter</module>
   </modules>
 
 </project>

@@ -53,6 +53,11 @@
       </dependency>
       <dependency>
         <groupId>es.abelfgdeveloper.school.starter</groupId>
+        <artifactId>school-server-starter</artifactId>
+        <version>${school-parent.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>es.abelfgdeveloper.school.starter</groupId>
         <artifactId>school-service-jpa-starter</artifactId>
         <version>${school-parent.version}</version>
       </dependency>
@@ -81,6 +86,7 @@
         <type>pom</type>
         <scope>import</scope>
       </dependency>
+
       <!-- THRID PARTY DEPENDENCIES -->
       <dependency>
         <groupId>de.codecentric</groupId>
