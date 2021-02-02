@@ -50,6 +50,11 @@
       </dependency>
       <dependency>
         <groupId>es.abelfgdeveloper.school.library</groupId>
+        <artifactId>school-common-jpa</artifactId>
+        <version>${school-parent.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>es.abelfgdeveloper.school.library</groupId>
         <artifactId>school-test</artifactId>
         <version>${school-parent.version}</version>
       </dependency>

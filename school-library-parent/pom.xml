@@ -17,7 +17,8 @@
 
   <modules>
     <module>school-common</module>
-    <module>school-test</module>
+    <module>school-common-jpa</module>
+	<module>school-test</module>
   </modules>
 
 </project>
