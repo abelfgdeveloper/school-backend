@@ -34,6 +34,7 @@
     <!-- THRID PARTY PROPERTIES -->
     <spring-boot-admin.version>2.3.1</spring-boot-admin.version>
     <embedded-database-spring-test.version>1.6.1</embedded-database-spring-test.version>
+    <logbook.version>2.4.1</logbook.version>
 
     <!-- PLUGINS PROPERTIES -->
     <jacoco-maven-plugin.version>0.8.6</jacoco-maven-plugin.version>
@@ -100,6 +101,11 @@
         <groupId>io.zonky.test</groupId>
         <artifactId>embedded-database-spring-test</artifactId>
         <version>${embedded-database-spring-test.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.zalando</groupId>
+        <artifactId>logbook-spring-boot-starter</artifactId>
+        <version>${logbook.version}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
