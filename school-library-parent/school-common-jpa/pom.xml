@@ -14,5 +14,15 @@
   <artifactId>school-common-jpa</artifactId>
 
   <dependencies>
+    <!-- ABELFGDEVELOPER DEPENDENCIES -->
+    <dependency>
+      <groupId>es.abelfgdeveloper.school.library</groupId>
+      <artifactId>school-common</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.data</groupId>
+      <artifactId>spring-data-commons</artifactId>
+    </dependency>
   </dependencies>
 </project>
