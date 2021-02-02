@@ -50,6 +50,11 @@
       </dependency>
       <dependency>
         <groupId>es.abelfgdeveloper.school.library</groupId>
+        <artifactId>school-dto</artifactId>
+        <version>${school-parent.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>es.abelfgdeveloper.school.library</groupId>
         <artifactId>school-common-jpa</artifactId>
         <version>${school-parent.version}</version>
       </dependency>
@@ -136,6 +141,7 @@
               <goal>prepare-agent</goal>
             </goals>
           </execution>
+          <!-- 
           <execution>
             <id>check</id>
             <goals>
@@ -161,6 +167,7 @@
               </rules>
             </configuration>
           </execution>
+           -->
           <execution>
             <id>report</id>
             <phase>test</phase>

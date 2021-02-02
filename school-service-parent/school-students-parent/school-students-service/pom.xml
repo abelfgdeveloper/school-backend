@@ -5,8 +5,8 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>es.abelfgdeveloper.school.service</groupId>
-    <artifactId>school-service-parent</artifactId>
+    <groupId>es.abelfgdeveloper.school.service.students</groupId>
+    <artifactId>school-students-parent</artifactId>
     <version>1.0.0-SNAPSHOT</version>
   </parent>
 
@@ -22,7 +22,10 @@
       <groupId>es.abelfgdeveloper.school.starter</groupId>
       <artifactId>school-service-jpa-starter</artifactId>
     </dependency>
-
+    <dependency>
+      <groupId>es.abelfgdeveloper.school.service.students</groupId>
+      <artifactId>school-students-service-rest-dto</artifactId>
+    </dependency>
 
     <!-- TESTS DEPENDENCIES -->
     <dependency>

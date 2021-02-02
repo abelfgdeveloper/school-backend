@@ -16,6 +16,7 @@
   <packaging>pom</packaging>
 
   <modules>
+    <module>school-dto</module>
     <module>school-common</module>
     <module>school-common-jpa</module>
 	<module>school-test</module>
