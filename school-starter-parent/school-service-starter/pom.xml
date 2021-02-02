@@ -14,6 +14,12 @@
   <artifactId>school-service-starter</artifactId>
 
   <dependencies>
+    <!-- ABELFGDEVELOPER DEPENDENCIES -->
+    <dependency>
+      <groupId>es.abelfgdeveloper.school.library</groupId>
+      <artifactId>school-common</artifactId>
+    </dependency>
+
     <!-- SPRING BOOT DEPENDENCIES -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
@@ -37,7 +43,7 @@
       <groupId>org.springframework.cloud</groupId>
       <artifactId>spring-cloud-starter-sleuth</artifactId>
     </dependency>
-    
+
     <!-- THRID PARTY DEPENDENCIES -->
     <dependency>
       <groupId>com.github.ben-manes.caffeine</groupId>
