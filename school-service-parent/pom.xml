@@ -16,6 +16,7 @@
   <packaging>pom</packaging>
 
   <modules>
+	<module>school-students-service</module>
   </modules>
 
 </project>
