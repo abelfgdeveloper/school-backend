@@ -14,6 +14,12 @@
   <artifactId>school-service-jpa-starter</artifactId>
 
   <dependencies>
+    <!-- ABELFGDEVELOPER DEPENDENCIES -->
+    <dependency>
+      <groupId>es.abelfgdeveloper.school.library</groupId>
+      <artifactId>school-common-jpa</artifactId>
+    </dependency>
+
     <!-- SPRING BOOT DEPENDENCIES -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
