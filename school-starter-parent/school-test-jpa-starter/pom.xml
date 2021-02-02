@@ -14,5 +14,9 @@
   <artifactId>school-test-jpa-starter</artifactId>
 
   <dependencies>
+    <dependency>
+      <groupId>io.zonky.test</groupId>
+      <artifactId>embedded-database-spring-test</artifactId>
+    </dependency>
   </dependencies>
 </project>
