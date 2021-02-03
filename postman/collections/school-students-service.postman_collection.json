@@ -1,0 +1,142 @@
+{
+	"info": {
+		"_postman_id": "991b04b1-f965-4be4-b035-e008fb19b8e7",
+		"name": "school-students-service",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "v1",
+			"item": [
+				{
+					"name": "Create Student",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"Frodo\",\r\n    \"lastName\": \"Bolson\",\r\n    \"email\": \"frodo@mail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{school-students-service-url}}/students/v1",
+							"host": [
+								"{{school-students-service-url}}"
+							],
+							"path": [
+								"students",
+								"v1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Student",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"Bilbo\",\r\n    \"lastName\": \"Bolson\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{school-students-service-url}}/students/v1/8877398d-9c33-4aa2-9fac-70fb36139bc0",
+							"host": [
+								"{{school-students-service-url}}"
+							],
+							"path": [
+								"students",
+								"v1",
+								"8877398d-9c33-4aa2-9fac-70fb36139bc0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find Student By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{school-students-service-url}}/students/v1/8877398d-9c33-4aa2-9fac-70fb36139bc0",
+							"host": [
+								"{{school-students-service-url}}"
+							],
+							"path": [
+								"students",
+								"v1",
+								"8877398d-9c33-4aa2-9fac-70fb36139bc0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find All Students",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{school-students-service-url}}/students/v1",
+							"host": [
+								"{{school-students-service-url}}"
+							],
+							"path": [
+								"students",
+								"v1"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "size",
+									"value": "10",
+									"disabled": true
+								},
+								{
+									"key": "query",
+									"value": "bilbo",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Student By ID",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{school-students-service-url}}/students/v1/8877398d-9c33-4aa2-9fac-70fb36139bc0",
+							"host": [
+								"{{school-students-service-url}}"
+							],
+							"path": [
+								"students",
+								"v1",
+								"8877398d-9c33-4aa2-9fac-70fb36139bc0"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

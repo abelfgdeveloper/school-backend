@@ -1,0 +1,446 @@
+{
+	"info": {
+		"_postman_id": "7c02a9d3-b76e-4a85-8792-1c1931683c30",
+		"name": "school-integration-test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "school-students-service",
+			"item": [
+				{
+					"name": "Create Student v1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var nextRequest = \"Update Student v1\";\r",
+									"var jsonRequest = JSON.parse(pm.request.body.raw);\r",
+									"var jsonResponse = pm.response.json();\r",
+									"var codeResponse = pm.response.code;\r",
+									"var expectedCodeResponse = 201;\r",
+									"\r",
+									"pm.test(\"Status code is \" + expectedCodeResponse, function () {\r",
+									"    pm.expect(codeResponse).to.eql(expectedCodeResponse);\r",
+									"});\r",
+									"\r",
+									"if(expectedCodeResponse === codeResponse) {\r",
+									"    pm.environment.set(\"studentId\", jsonResponse.id);\r",
+									"    pm.environment.set(\"student\", JSON.stringify(jsonResponse));\r",
+									"\r",
+									"    pm.test(\"id is not null \", function () {\r",
+									"        pm.expect(jsonResponse.id).not.eql(null);\r",
+									"    });\r",
+									"\r",
+									"    pm.test(\"firstName is \" + jsonRequest.firstName, function () {\r",
+									"        pm.expect(jsonResponse.firstName).to.eql(jsonRequest.firstName);\r",
+									"    });\r",
+									"\r",
+									"    pm.test(\"lastName is \" + jsonRequest.lastName, function () {\r",
+									"        pm.expect(jsonResponse.lastName).to.eql(jsonRequest.lastName);\r",
+									"    });\r",
+									"\r",
+									"    pm.test(\"email is \" + jsonRequest.email, function () {\r",
+									"        pm.expect(jsonResponse.email).to.eql(jsonRequest.email);\r",
+									"    });\r",
+									"\r",
+									"    pm.test(\"createAt is not null \", function () {\r",
+									"        pm.expect(jsonResponse.createAt).not.eql(null);\r",
+									"    });\r",
+									"} else {\r",
+									"    nextRequest = null;\r",
+									"}\r",
+									"postman.setNextRequest(nextRequest);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"Frodo\",\r\n    \"lastName\": \"Bolson\",\r\n    \"email\": \"frodo@mail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{school-students-service-url}}/students/v1",
+							"host": [
+								"{{school-students-service-url}}"
+							],
+							"path": [
+								"students",
+								"v1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Student v1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var nextRequest = \"Find Student By ID v1\";\r",
+									"var jsonRequest = JSON.parse(pm.request.body.raw);\r",
+									"var jsonResponse = pm.response.json();\r",
+									"var codeResponse = pm.response.code;\r",
+									"var studentId = pm.environment.get(\"studentId\");\r",
+									"var student = JSON.parse(pm.environment.get(\"student\"));\r",
+									"var expectedCodeResponse = 200;\r",
+									"\r",
+									"pm.test(\"Status code is \" + expectedCodeResponse, function () {\r",
+									"    pm.expect(codeResponse).to.eql(expectedCodeResponse);\r",
+									"});\r",
+									"\r",
+									"if(expectedCodeResponse === codeResponse) {\r",
+									"    pm.environment.set(\"student\", JSON.stringify(jsonResponse));\r",
+									"    pm.test(\"id is \" + studentId, function () {\r",
+									"        pm.expect(jsonResponse.id).to.eql(studentId);\r",
+									"    });\r",
+									"\r",
+									"    pm.test(\"firstName is \" + jsonRequest.firstName, function () {\r",
+									"        pm.expect(jsonResponse.firstName).to.eql(jsonRequest.firstName);\r",
+									"    });\r",
+									"\r",
+									"    pm.test(\"lastName is \" + jsonRequest.lastName, function () {\r",
+									"        pm.expect(jsonResponse.lastName).to.eql(jsonRequest.lastName);\r",
+									"    });\r",
+									"\r",
+									"    pm.test(\"email is \" + student.email, function () {\r",
+									"        pm.expect(jsonResponse.email).to.eql(student.email);\r",
+									"    });\r",
+									"\r",
+									"    pm.test(\"createAt is not null \", function () {\r",
+									"        pm.expect(jsonResponse.createAt).not.eql(null);\r",
+									"    });\r",
+									"} else {\r",
+									"    nextRequest = null;\r",
+									"}\r",
+									"postman.setNextRequest(nextRequest);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"Bilbo\",\r\n    \"lastName\": \"Baggins\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{school-students-service-url}}/students/v1/{{studentId}}",
+							"host": [
+								"{{school-students-service-url}}"
+							],
+							"path": [
+								"students",
+								"v1",
+								"{{studentId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find Student By ID v1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var nextRequest = \"Find All Students v1\";\r",
+									"var jsonResponse = pm.response.json();\r",
+									"var codeResponse = pm.response.code;\r",
+									"var studentId = pm.environment.get(\"studentId\");\r",
+									"var student = JSON.parse(pm.environment.get(\"student\"));\r",
+									"var expectedCodeResponse = 200;\r",
+									"\r",
+									"pm.test(\"Status code is \" + expectedCodeResponse, function () {\r",
+									"    pm.expect(codeResponse).to.eql(expectedCodeResponse);\r",
+									"});\r",
+									"\r",
+									"if(expectedCodeResponse === codeResponse) {\r",
+									"    \r",
+									"    pm.test(\"id is \" + studentId, function () {\r",
+									"        pm.expect(jsonResponse.id).to.eql(studentId);\r",
+									"    });\r",
+									"\r",
+									"    pm.test(\"firstName is \" + student.firstName, function () {\r",
+									"        pm.expect(jsonResponse.firstName).to.eql(student.firstName);\r",
+									"    });\r",
+									"\r",
+									"    pm.test(\"lastName is \" + student.lastName, function () {\r",
+									"        pm.expect(jsonResponse.lastName).to.eql(student.lastName);\r",
+									"    });\r",
+									"\r",
+									"    pm.test(\"email is \" + student.email, function () {\r",
+									"        pm.expect(jsonResponse.email).to.eql(student.email);\r",
+									"    });\r",
+									"\r",
+									"    pm.test(\"createAt is not null \", function () {\r",
+									"        pm.expect(jsonResponse.createAt).not.eql(null);\r",
+									"    });\r",
+									"} else {\r",
+									"    nextRequest = null;\r",
+									"}\r",
+									"postman.setNextRequest(nextRequest);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{school-students-service-url}}/students/v1/{{studentId}}",
+							"host": [
+								"{{school-students-service-url}}"
+							],
+							"path": [
+								"students",
+								"v1",
+								"{{studentId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find Student By ID v1 - Not Found",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var nextRequest = null;\r",
+									"var jsonResponse = pm.response.json();\r",
+									"var codeResponse = pm.response.code;\r",
+									"var errorCode = \"El estudiante con ID\";\r",
+									"var expectedCodeResponse = 404;\r",
+									"\r",
+									"pm.environment.unset(\"studentId\");\r",
+									"\r",
+									"pm.test(\"Status code is \" + expectedCodeResponse, function () {\r",
+									"    pm.expect(codeResponse).to.eql(expectedCodeResponse);\r",
+									"});\r",
+									"\r",
+									"if(expectedCodeResponse === codeResponse) {\r",
+									"\r",
+									"    pm.test(\"code include: \" + errorCode, function () {\r",
+									"        pm.expect(jsonResponse.code).to.include(errorCode);\r",
+									"    });\r",
+									"\r",
+									"} else {\r",
+									"    nextRequest = null;\r",
+									"}\r",
+									"postman.setNextRequest(nextRequest);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{school-students-service-url}}/students/v1/{{studentId}}",
+							"host": [
+								"{{school-students-service-url}}"
+							],
+							"path": [
+								"students",
+								"v1",
+								"{{studentId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find All Students v1",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var student = JSON.parse(pm.environment.get(\"student\"));\r",
+									"pm.environment.set(\"studentEmail\", student.email);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var nextRequest = \"Delete Student By ID v1\";\r",
+									"var jsonResponse = pm.response.json();\r",
+									"var codeResponse = pm.response.code;\r",
+									"var studentId = pm.environment.get(\"studentId\");\r",
+									"var student = JSON.parse(pm.environment.get(\"student\"));\r",
+									"var expectedCodeResponse = 200;\r",
+									"\r",
+									"pm.environment.unset(\"studentEmail\");\r",
+									"\r",
+									"pm.test(\"Status code is \" + expectedCodeResponse, function () {\r",
+									"    pm.expect(codeResponse).to.eql(expectedCodeResponse);\r",
+									"});\r",
+									"\r",
+									"if(expectedCodeResponse === codeResponse) {\r",
+									"    \r",
+									"    pm.test(\"students size is \" + 1, function () {\r",
+									"        pm.expect(jsonResponse.students.length).to.eql(1);\r",
+									"    });\r",
+									"\r",
+									"    pm.test(\"id is \" + studentId, function () {\r",
+									"        pm.expect(jsonResponse.students[0].id).to.eql(studentId);\r",
+									"    });\r",
+									"\r",
+									"    pm.test(\"firstName is \" + student.firstName, function () {\r",
+									"        pm.expect(jsonResponse.students[0].firstName).to.eql(student.firstName);\r",
+									"    });\r",
+									"\r",
+									"    pm.test(\"lastName is \" + student.lastName, function () {\r",
+									"        pm.expect(jsonResponse.students[0].lastName).to.eql(student.lastName);\r",
+									"    });\r",
+									"\r",
+									"    pm.test(\"email is \" + student.email, function () {\r",
+									"        pm.expect(jsonResponse.students[0].email).to.eql(student.email);\r",
+									"    });\r",
+									"\r",
+									"    pm.test(\"createAt is not null \", function () {\r",
+									"        pm.expect(jsonResponse.students[0].createAt).not.eql(null);\r",
+									"    });\r",
+									"} else {\r",
+									"    nextRequest = null;\r",
+									"}\r",
+									"postman.setNextRequest(nextRequest);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{school-students-service-url}}/students/v1?query={{studentEmail}}",
+							"host": [
+								"{{school-students-service-url}}"
+							],
+							"path": [
+								"students",
+								"v1"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "size",
+									"value": "10",
+									"disabled": true
+								},
+								{
+									"key": "query",
+									"value": "{{studentEmail}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Student By ID v1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var nextRequest = \"Find Student By ID v1 - Not Found\";\r",
+									"var codeResponse = pm.response.code;\r",
+									"var expectedCodeResponse = 204;\r",
+									"\r",
+									"pm.environment.unset(\"student\");\r",
+									"\r",
+									"pm.test(\"Status code is \" + expectedCodeResponse, function () {\r",
+									"    pm.expect(codeResponse).to.eql(expectedCodeResponse);\r",
+									"});\r",
+									"\r",
+									"if(expectedCodeResponse === codeResponse) {\r",
+									"    \r",
+									"} else {\r",
+									"    nextRequest = null;\r",
+									"}\r",
+									"postman.setNextRequest(nextRequest);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{school-students-service-url}}/students/v1/{{studentId}}",
+							"host": [
+								"{{school-students-service-url}}"
+							],
+							"path": [
+								"students",
+								"v1",
+								"{{studentId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

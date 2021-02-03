@@ -1,0 +1,27 @@
+{
+	"info": {
+		"_postman_id": "9befd035-dd19-4fe6-90c0-b5ccb3d1747d",
+		"name": "school-config-server",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get Properties",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{school-config-server-url}}/school-students-service/local",
+					"host": [
+						"{{school-config-server-url}}"
+					],
+					"path": [
+						"school-students-service",
+						"local"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
