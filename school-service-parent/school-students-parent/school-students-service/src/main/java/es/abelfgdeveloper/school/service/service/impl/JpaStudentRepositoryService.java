@@ -86,7 +86,7 @@ public class JpaStudentRepositoryService implements StudentRepositoryService {
     if (studentInDataBase.isPresent()) {
       return studentInDataBase.get();
     } else {
-      throw new NotFoundException("El curso con ID: " + id + " no existe");
+      throw new NotFoundException("El estudiante con ID: " + id + " no existe");
     }
   }
 }
