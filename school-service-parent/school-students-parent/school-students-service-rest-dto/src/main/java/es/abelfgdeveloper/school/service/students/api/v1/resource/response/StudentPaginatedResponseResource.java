@@ -1,4 +1,4 @@
-package es.abelfgdeveloper.school.service.api.v1.resource.response;
+package es.abelfgdeveloper.school.service.students.api.v1.resource.response;
 
 import es.abelfgdeveloper.common.api.v1.resource.response.PaginationResponseResource;
 import java.util.List;
