@@ -9,9 +9,17 @@ import org.springframework.stereotype.Service;
 @Service
 public class DefaultRouteRepositoryService implements RouteRepositoryService {
 
+  private static final String SCHOOL_APPLICATION = "school";
+
   @Override
   public List<RouteData> getRoutes() {
     List<RouteData> routes = new ArrayList<>();
+    routes.add(
+        RouteData.builder()
+            .application(SCHOOL_APPLICATION)
+            .microservice("school-students-service")
+            .path("students")
+            .build());
     return routes;
   }
 }
