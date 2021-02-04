@@ -35,6 +35,8 @@
     <spring-boot-admin.version>2.3.1</spring-boot-admin.version>
     <embedded-database-spring-test.version>1.6.1</embedded-database-spring-test.version>
     <logbook.version>2.4.1</logbook.version>
+    <cucumber.version>4.7.4</cucumber.version>
+    <cucumber.reporting.version>3.0.4</cucumber.reporting.version>
 
     <!-- PLUGINS PROPERTIES -->
     <jacoco-maven-plugin.version>0.8.6</jacoco-maven-plugin.version>
@@ -121,6 +123,26 @@
         <groupId>org.zalando</groupId>
         <artifactId>logbook-spring-boot-starter</artifactId>
         <version>${logbook.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>io.cucumber</groupId>
+        <artifactId>cucumber-java</artifactId>
+        <version>${cucumber.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>io.cucumber</groupId>
+        <artifactId>cucumber-junit</artifactId>
+        <version>${cucumber.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>io.cucumber</groupId>
+        <artifactId>cucumber-spring</artifactId>
+        <version>${cucumber.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>de.monochromata.cucumber</groupId>
+        <artifactId>reporting-plugin</artifactId>
+        <version>${cucumber.reporting.version}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
