@@ -10,6 +10,7 @@ import es.abelfgdeveloper.school.service.students.model.entity.StudentEntity;
 import es.abelfgdeveloper.school.service.students.model.repository.StudentSpringDataJpaRepository;
 import es.abelfgdeveloper.school.service.students.model.repository.specification.StudentSpecification;
 import es.abelfgdeveloper.school.service.students.service.StudentRepositoryService;
+import es.abelfgdeveloper.school.service.students.util.StudentErrorCodes;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
@@ -86,7 +87,7 @@ public class JpaStudentRepositoryService implements StudentRepositoryService {
     if (studentInDataBase.isPresent()) {
       return studentInDataBase.get();
     } else {
-      throw new NotFoundException("El estudiante con ID: " + id + " no existe");
+      throw new NotFoundException(StudentErrorCodes.ID_NOT_FOUND);
     }
   }
 }
