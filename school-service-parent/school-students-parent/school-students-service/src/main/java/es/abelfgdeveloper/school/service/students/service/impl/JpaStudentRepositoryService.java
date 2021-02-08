@@ -71,6 +71,16 @@ public class JpaStudentRepositoryService implements StudentRepositoryService {
         .build();
   }
 
+  @Override
+  public Optional<Student> findByEmail(String email) {
+    Optional<StudentEntity> studentInDataBase = studentRepository.findByEmail(email);
+    if (studentInDataBase.isPresent()) {
+      return Optional.of(studentMapper.map(studentInDataBase.get()));
+    } else {
+      return Optional.empty();
+    }
+  }
+
   private StudentEntity create(Student student) {
     return studentRepository.save(studentMapper.map(student));
   }
