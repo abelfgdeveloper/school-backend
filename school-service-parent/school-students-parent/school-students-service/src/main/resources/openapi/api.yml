@@ -1,0 +1,369 @@
+openapi: 3.0.1
+info:
+  title: School Students API
+  description: 'Api para gestionar los estudiantes del colegio'
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.0
+servers:
+- url: http://localhost:8090/api/school
+tags:
+- name: Students
+  description: Operaciones sobre los estudiantes
+paths:
+  /students/v1:
+    post:
+      tags:
+        - Students
+      summary: Crea un nuevo estudiante en el sistema
+      requestBody:
+        description: Recurso estudiante que se desea añadir en el sistema
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateStudentRequestResourceV1'
+      responses:
+        201:
+          description: 'Successfully created student'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StudentResponseResourceV1'
+        400:
+          description: 'Bad Request 
+                        <p>Codigos de error que puede devolver</p>
+                        <ul>
+                        <li>001001011 => El body de la request es obligatorio</li>
+                        <li>001001003 => El campo firstName es obligatorio</li>
+                        <li>001001007 => El campo firstName no cumple con la longitud</li>
+                        <li>001001004 => El campo lastName es obligatorio</li>
+                        <li>001001008 => El campo lastName no cumple con la longitud</li>
+                        <li>001001005 => El campo email es obligatorio</li>
+                        <li>001001009 => El campo email no cumple con la longitud</li>
+                        <li>001001010 => El campo email no cumple con el patron</li>
+                        <li>001001016 => El email ya existe en el sistema</li>
+                        </ul>'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseResourceV1'
+        500:
+          description: 'Internal Server Error 
+                        <p>Codigos de error que puede devolver</p>
+                        <ul>
+                        <li>000000000 => Error interno del servidor</li>
+                        </ul>'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseResourceV1'
+    get:
+      tags:
+        - Students
+      summary: Recupera los estudiantes del sistema con paginacion
+      parameters:
+        - name: page
+          in: query
+          description: 'Numero de pagina'
+          required: false
+          example: 1
+          schema:
+            title: asas
+            type: integer
+            format: int32
+            minimum: 1
+            maximum: 50
+        - name: size
+          in: query
+          description: 'Tamaño de pagina'
+          required: false
+          example: 10
+          schema:
+            type: integer
+            format: int32
+            minimum: 1
+        - name: query
+          in: query
+          description: 'Texto a buscar en el nombre, apellido o email del estudiante'
+          required: false
+          schema:
+            type: string
+      responses:
+        200:
+          description: 'Successfully find the students'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StudentPaginatedResponseResourceV1'
+        500:
+          description: 'Internal Server Error 
+                        <p>Codigos de error que puede devolver</p>
+                        <ul>
+                        <li>000000000 => Error interno del servidor</li>
+                        </ul>'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseResourceV1'
+  /students/v1/{studentId}:
+    put:
+      tags:
+        - Students
+      summary: Edita un estudiante del sistema
+      parameters:
+        - name: studentId
+          in: path
+          description: 'ID del estudiante que se desea editar'
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Recurso estudiante que se desea editar del sistema
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateStudentRequestResourceV1'
+      responses:
+        200:
+          description: 'Successfully edited student'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StudentResponseResourceV1'
+        400:
+          description: 'Bad Request 
+                        <p>Codigos de error que puede devolver</p>
+                        <ul>
+                        <li>001001011 => El body de la request es obligatorio</li>
+                        <li>001001003 => El campo firstName es obligatorio</li>
+                        <li>001001007 => El campo firstName no cumple con la longitud</li>
+                        <li>001001004 => El campo lastName es obligatorio</li>
+                        <li>001001008 => El campo lastName no cumple con la longitud</li>
+                        <li>001001005 => El campo email es obligatorio</li>
+                        <li>001001009 => El campo email no cumple con la longitud</li>
+                        <li>001001010 => El campo email no cumple con el patron</li>
+                        </ul>'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseResourceV1'
+        404:
+          description: 'Not Found 
+                        <p>Codigos de error que puede devolver</p>
+                        <ul>
+                        <li>001001001 => El usuario con el ID indicado no existe</li>
+                        </ul>'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseResourceV1'
+        500:
+          description: 'Internal Server Error 
+                        <p>Codigos de error que puede devolver</p>
+                        <ul>
+                        <li>000000000 => Error interno del servidor</li>
+                        </ul>'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseResourceV1'
+    delete:
+      tags:
+        - Students
+      summary: Elimina un estudiante del sistema
+      parameters:
+        - name: studentId
+          in: path
+          description: 'ID del estudiante que se desea eliminar'
+          required: true
+          schema:
+            type: string
+      responses:
+        204:
+          description: 'Successfully deleted student'
+        404:
+          description: 'Not Found 
+                        <p>Codigos de error que puede devolver</p>
+                        <ul>
+                        <li>001001001 => El usuario con el ID indicado no existe</li>
+                        </ul>'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseResourceV1'
+        500:
+          description: 'Internal Server Error 
+                        <p>Codigos de error que puede devolver</p>
+                        <ul>
+                        <li>000000000 => Error interno del servidor</li>
+                        </ul>'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseResourceV1'
+    get:
+      tags:
+        - Students
+      summary: Recupera un estudiante del sistema
+      parameters:
+        - name: studentId
+          in: path
+          description: 'ID del estudiante que se desea consultar'
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: 'Successfully find the student'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StudentResponseResourceV1'
+        404:
+          description: 'Not Found 
+                        <p>Codigos de error que puede devolver</p>
+                        <ul>
+                        <li>001001001 => El usuario con el ID indicado no existe</li>
+                        </ul>'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseResourceV1'
+        500:
+          description: 'Internal Server Error 
+                        <p>Codigos de error que puede devolver</p>
+                        <ul>
+                        <li>000000000 => Error interno del servidor</li>
+                        </ul>'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseResourceV1'
+                
+
+components:
+  schemas:
+    StudentResponseResourceV1:
+      description: 'Recurso que representa un estudiante en el sistema'
+      type: object
+      required:
+        - id
+        - firstName
+        - lastName
+        - email
+        - createAt
+      properties:
+        id:
+          type: string
+          title: 'ID del estudiante'
+          example: 'acac50ff-8bf7-40c8-8ea2-b64566aeb885'
+        firstName:
+          type: string
+          title: 'Nombre del estudiante'
+          minLength: 3
+          maxLength: 25
+          example: 'Frodo'
+        lastName:
+          title: 'Apellido del estudiante'
+          type: string
+          minLength: 3
+          maxLength: 25
+          example: 'Bolson'
+        email:
+          title: 'Email del estudiante'
+          type: string
+          minLength: 3
+          maxLength: 50
+          example: 'frodobolson@email.com'
+          pattern: '^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$'
+        createAt:
+          title: 'Fecha y Hora de creacion del estudiante en el sistema'
+          type: string
+          format: date-time
+          example: '2021-02-08T22:39:59.0851518'
+    StudentPaginatedResponseResourceV1:
+      description: 'Recurso que representa un estudiante en el sistema con paginacion'
+      type: object
+      required:
+        - students
+      properties:
+        students: 
+          type: array
+          items:
+            $ref: '#/components/schemas/StudentResponseResourceV1'
+    CreateStudentRequestResourceV1:
+      description: 'Recurso para crear un nuevo estudiante en el sistema'
+      type: object
+      required:
+        - firstName
+        - lastName
+        - email
+      properties:
+        firstName:
+          type: string
+          title: 'Nombre del estudiante'
+          minLength: 3
+          maxLength: 25
+          example: 'Frodo'
+        lastName:
+          title: 'Apellido del estudiante'
+          type: string
+          minLength: 3
+          maxLength: 25
+          example: 'Bolson'
+        email:
+          title: 'Email del estudiante'
+          type: string
+          minLength: 3
+          maxLength: 50
+          example: 'frodobolson@email.com'
+          pattern: '^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$'
+    UpdateStudentRequestResourceV1:
+      description: 'Recurso para editar un estudiante del sistema'
+      type: object
+      required:
+        - firstName
+        - lastName
+      properties:
+        firstName:
+          type: string
+          title: 'Nombre del estudiante'
+          minLength: 3
+          maxLength: 25
+          example: 'Frodo'
+        lastName:
+          title: 'Apellido del estudiante'
+          type: string
+          minLength: 3
+          maxLength: 25
+          example: 'Bolson'
+    ErrorResponseResourceV1:
+      description: 'Recurso de error generico'
+      type: object
+      required: 
+        - timestamp
+        - status
+        - respondeCode
+        - code
+      properties:
+        timestamp:
+          title: 'Hora a la cual ocurrio el error'
+          type: string
+          format: date-time
+          example: '2021-02-08T22:39:59.0851518'
+        status:
+          title: 'Descripcion del error HTTP'
+          type: string
+          example: 'Bad Request'
+        respondeCode:
+          title: 'Codigo del error HTTP'
+          type: string
+          example: '400'
+        code:
+          title: 'Codigo de error interno'
+          type: string
+          example: '001001016'
+        
