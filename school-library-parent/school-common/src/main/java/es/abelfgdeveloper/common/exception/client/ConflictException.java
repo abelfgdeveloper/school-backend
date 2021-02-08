@@ -1,14 +1,17 @@
 package es.abelfgdeveloper.common.exception.client;
 
-public class ConflictException extends RuntimeException {
+import es.abelfgdeveloper.common.exception.AbelfgdeveloperException;
+
+public class ConflictException extends AbelfgdeveloperException {
 
   private static final long serialVersionUID = 1L;
+  private static final int ERROR_STATUS_CODE = 409;
 
   public ConflictException(String message) {
-    super(message);
+    super(ERROR_STATUS_CODE, message);
   }
 
   public ConflictException(String message, Throwable cause) {
-    super(message, cause);
+    super(ERROR_STATUS_CODE, message, cause);
   }
 }

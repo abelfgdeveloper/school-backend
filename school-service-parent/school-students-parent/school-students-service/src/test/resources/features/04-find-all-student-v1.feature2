@@ -1,0 +1,17 @@
+Feature: Find all students
+    I want to find all students
+
+    Scenario Outline: Find all students <TC>
+        Given The endpoint "/students/v1"
+        And QueryParam "page" is <page>
+        And QueryParam "size" is <size>
+        And QueryParam "query" is <query>
+        When Make "GET" call
+        Then I verify the <responseStatusCode> response code
+        And If response code not 200 i verify the error code "<errorCode>"
+
+        Examples: 
+            | TC    | page | size | query | responseStatusCode    | errorCode                |
+            | TC01  | 1    | 10   | mail  | 200                   |                          |
+#            | TC02  | Fr        | Bolson   | 400                   | student.firstName.length |
+

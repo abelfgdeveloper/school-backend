@@ -10,6 +10,7 @@ import es.abelfgdeveloper.school.service.students.model.entity.StudentEntity;
 import es.abelfgdeveloper.school.service.students.model.repository.StudentSpringDataJpaRepository;
 import es.abelfgdeveloper.school.service.students.model.repository.specification.StudentSpecification;
 import es.abelfgdeveloper.school.service.students.service.StudentRepositoryService;
+import es.abelfgdeveloper.school.service.students.util.ErrorCodes;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
@@ -70,6 +71,16 @@ public class JpaStudentRepositoryService implements StudentRepositoryService {
         .build();
   }
 
+  @Override
+  public Optional<Student> findByEmail(String email) {
+    Optional<StudentEntity> studentInDataBase = studentRepository.findByEmail(email);
+    if (studentInDataBase.isPresent()) {
+      return Optional.of(studentMapper.map(studentInDataBase.get()));
+    } else {
+      return Optional.empty();
+    }
+  }
+
   private StudentEntity create(Student student) {
     return studentRepository.save(studentMapper.map(student));
   }
@@ -86,7 +97,7 @@ public class JpaStudentRepositoryService implements StudentRepositoryService {
     if (studentInDataBase.isPresent()) {
       return studentInDataBase.get();
     } else {
-      throw new NotFoundException("El estudiante con ID: " + id + " no existe");
+      throw new NotFoundException(ErrorCodes.STUDENT_ID_NOT_FOUND);
     }
   }
 }

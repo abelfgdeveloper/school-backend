@@ -1,0 +1,15 @@
+Feature: Find student by ID
+    I want to find student by ID
+
+    Scenario Outline: Find student by ID <TC>
+        Given The endpoint "/students/v1/{studentId}"
+        And PathVariable "{studentId}" is "<studentId>"
+        When Make "GET" call
+        Then I verify the <responseStatusCode> response code
+        And If response code not 200 i verify the error code "<errorCode>"
+
+        Examples: 
+            | TC    | studentId         | responseStatusCode    | errorCode                |
+            | TC01  | inserted resource | 200                   |                          |
+#            | TC02  | Fr        | Bolson   | 400                   | student.firstName.length |
+

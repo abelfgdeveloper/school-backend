@@ -30,9 +30,11 @@
       <groupId>io.cucumber</groupId>
       <artifactId>cucumber-spring</artifactId>
     </dependency>
+    <!-- 
     <dependency>
       <groupId>de.monochromata.cucumber</groupId>
       <artifactId>reporting-plugin</artifactId>
     </dependency>
+     -->
   </dependencies>
 </project>

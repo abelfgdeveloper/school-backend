@@ -3,6 +3,7 @@ package es.abelfgdeveloper.school.service.students.service;
 import es.abelfgdeveloper.common.domain.PaginationIn;
 import es.abelfgdeveloper.school.service.students.domain.Student;
 import es.abelfgdeveloper.school.service.students.domain.StudentPaginated;
+import java.util.Optional;
 
 public interface StudentRepositoryService {
 
@@ -13,4 +14,6 @@ public interface StudentRepositoryService {
   Student findById(String id);
 
   StudentPaginated findAll(PaginationIn pagination, String query);
+
+  Optional<Student> findByEmail(String email);
 }

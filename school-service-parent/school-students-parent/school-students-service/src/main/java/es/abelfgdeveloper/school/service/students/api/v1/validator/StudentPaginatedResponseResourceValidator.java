@@ -4,6 +4,7 @@ import es.abelfgdeveloper.common.api.v1.resource.validator.PaginationResponseRes
 import es.abelfgdeveloper.common.exception.server.ValidationResponseException;
 import es.abelfgdeveloper.school.service.students.api.v1.resource.response.StudentPaginatedResponseResource;
 import es.abelfgdeveloper.school.service.students.api.v1.resource.response.StudentResponseResource;
+import es.abelfgdeveloper.school.service.students.util.ErrorCodes;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -16,7 +17,7 @@ public class StudentPaginatedResponseResourceValidator extends StudentValidator 
 
   public void validate(StudentPaginatedResponseResource studentPaginated) {
     if (studentPaginated == null) {
-      throw new ValidationResponseException("El cuerpo de la peticion es obligatorio");
+      throw new ValidationResponseException(ErrorCodes.STUDENT_PAGINATED_RESPONSE_BODY_NOT_NULL);
     }
     paginationResponseResourceValidator.validate(studentPaginated.getPagination());
     for (StudentResponseResource student : studentPaginated.getStudents()) {

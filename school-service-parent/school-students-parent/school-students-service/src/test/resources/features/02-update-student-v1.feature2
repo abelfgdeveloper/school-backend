@@ -1,0 +1,21 @@
+Feature: Update student
+    I want to update student
+
+    Scenario Outline: Update student <TC>
+        Given The endpoint "/students/v1/{studentId}"
+        And PathVariable "{studentId}" is "<studentId>"
+        And The resource UpdateStudentRequestResourceV1
+        And The input data
+            | firstName      | lastName   |
+            | <firstName>    | <lastName> |
+        When Make "PUT" call
+        Then I verify the <responseStatusCode> response code
+        And If response code not 200 i verify the error code "<errorCode>"
+        And If response code is 200 i save the resource
+
+        Examples: 
+            | TC    | studentId         | firstName | lastName | responseStatusCode    | errorCode                |
+            | TC01  | inserted resource | Frodo     | Bolson   | 200                   |                          |
+            | TC02  | aaa               | Frodo     | Bolson   | 404                   | 001001001                |
+#            | TC02  | Fr        | Bolson   | 400                   | student.firstName.length |
+
