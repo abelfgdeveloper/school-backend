@@ -52,6 +52,7 @@
         <configuration>
           <excludes>
             <exclude>es/abelfgdeveloper/SchoolStudentsServiceApplication.class</exclude>
+            <exclude>es/abelfgdeveloper/**/entity/*.class</exclude>
           </excludes>
         </configuration>
       </plugin>
