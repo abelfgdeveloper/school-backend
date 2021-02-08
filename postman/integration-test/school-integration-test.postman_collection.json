@@ -235,7 +235,7 @@
 									"var nextRequest = null;\r",
 									"var jsonResponse = pm.response.json();\r",
 									"var codeResponse = pm.response.code;\r",
-									"var errorCode = \"El estudiante con ID\";\r",
+									"var errorCode = \"001001001\";\r",
 									"var expectedCodeResponse = 404;\r",
 									"\r",
 									"pm.environment.unset(\"studentId\");\r",
