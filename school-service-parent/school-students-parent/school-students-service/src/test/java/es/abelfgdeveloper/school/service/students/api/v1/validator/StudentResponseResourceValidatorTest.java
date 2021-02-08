@@ -73,6 +73,26 @@ class StudentResponseResourceValidatorTest {
   }
 
   @Test
+  void test_validate_idEmpty() {
+    // given
+    StudentResponseResource studentResponseResource =
+        StudentObjectMother.getStudentResponseResourceV1();
+    studentResponseResource.setId(" ");
+
+    // when
+    AbelfgDeveloperException exception =
+        assertThrows(
+            ValidationResponseException.class,
+            () -> {
+              studentResponseResourceValidator.validate(studentResponseResource);
+            });
+
+    // then
+    assertEquals(500, exception.getErrorStatusCode());
+    assertEquals(StudentErrorCodes.ID_NOT_NULL, exception.getMessage());
+  }
+
+  @Test
   void test_validate_firstNameNull() {
     // given
     StudentResponseResource studentResponseResource =
