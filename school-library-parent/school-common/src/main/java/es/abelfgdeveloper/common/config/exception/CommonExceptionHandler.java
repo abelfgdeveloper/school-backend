@@ -3,58 +3,27 @@ package es.abelfgdeveloper.common.config.exception;
 import es.abelfgdeveloper.common.api.v1.resource.response.ErrorResponseResource;
 import es.abelfgdeveloper.common.api.v1.resource.response.ErrorResponseResource.ErrorResponseResourceBuilder;
 import es.abelfgdeveloper.common.config.exception.mapper.StackTraceMapper;
-import es.abelfgdeveloper.common.exception.client.BadRequestException;
-import es.abelfgdeveloper.common.exception.client.ConflictException;
-import es.abelfgdeveloper.common.exception.client.NotFoundException;
-import es.abelfgdeveloper.common.exception.client.ValidationRequestException;
-import es.abelfgdeveloper.common.exception.server.ValidationResponseException;
+import es.abelfgdeveloper.common.exception.AbelfgdeveloperException;
 import java.time.LocalDateTime;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+@Slf4j
 @RequiredArgsConstructor
 @ControllerAdvice
 public class CommonExceptionHandler extends ResponseEntityExceptionHandler {
 
   private final StackTraceMapper stackTraceMapper;
 
-  @ExceptionHandler(NotFoundException.class)
-  public ResponseEntity<ErrorResponseResource> notFoundExceptionHandler(NotFoundException e) {
-    HttpStatus httpStatus = HttpStatus.NOT_FOUND;
-    ErrorResponseResource body = generateErrorResponseResource(e, httpStatus);
-    return new ResponseEntity<>(body, httpStatus);
-  }
-
-  @ExceptionHandler(ConflictException.class)
-  public ResponseEntity<ErrorResponseResource> conflictExceptionHandler(ConflictException e) {
-    HttpStatus httpStatus = HttpStatus.CONFLICT;
-    ErrorResponseResource body = generateErrorResponseResource(e, httpStatus);
-    return new ResponseEntity<>(body, httpStatus);
-  }
-
-  @ExceptionHandler(BadRequestException.class)
-  public ResponseEntity<ErrorResponseResource> badRequestExceptionHandler(BadRequestException e) {
-    HttpStatus httpStatus = HttpStatus.BAD_REQUEST;
-    ErrorResponseResource body = generateErrorResponseResource(e, httpStatus);
-    return new ResponseEntity<>(body, httpStatus);
-  }
-
-  @ExceptionHandler(ValidationRequestException.class)
-  public ResponseEntity<ErrorResponseResource> validationRequestExceptionHandler(
-      ValidationRequestException e) {
-    HttpStatus httpStatus = HttpStatus.BAD_REQUEST;
-    ErrorResponseResource body = generateErrorResponseResource(e, httpStatus);
-    return new ResponseEntity<>(body, httpStatus);
-  }
-
-  @ExceptionHandler(ValidationResponseException.class)
-  public ResponseEntity<ErrorResponseResource> validationResponseExceptionHandler(
-      ValidationResponseException e) {
-    HttpStatus httpStatus = HttpStatus.INTERNAL_SERVER_ERROR;
+  @ExceptionHandler(AbelfgdeveloperException.class)
+  public ResponseEntity<ErrorResponseResource> abelfgdeveloperExceptionHandler(
+      AbelfgdeveloperException e) {
+    HttpStatus httpStatus = HttpStatus.valueOf(e.getErrorStatusCode());
     ErrorResponseResource body = generateErrorResponseResource(e, httpStatus);
     return new ResponseEntity<>(body, httpStatus);
   }
@@ -71,10 +40,19 @@ public class CommonExceptionHandler extends ResponseEntityExceptionHandler {
         ErrorResponseResource.builder()
             .timestamp(LocalDateTime.now())
             .code(e.getMessage())
-            .respondeCode(httpStatus.value())
-            .status(httpStatus.getReasonPhrase())
             .detail(e.getClass().getSimpleName())
             .stackTrace(stackTraceMapper.map(e.getStackTrace()));
+    if (httpStatus != null) {
+      builder.respondeCode(httpStatus.value());
+      builder.status(httpStatus.getReasonPhrase());
+      if (httpStatus.is5xxServerError()) {
+        builder.code("000000000");
+        log.error("Exception: {}", e);
+      } else {
+        log.warn("Exception: {}", e);
+      }
+    }
+
     if (e.getCause() != null) {
       builder.cause(generateErrorResponseResource(e.getCause(), null));
     }
