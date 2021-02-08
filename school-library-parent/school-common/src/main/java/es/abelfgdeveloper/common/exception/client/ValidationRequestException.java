@@ -1,8 +1,8 @@
 package es.abelfgdeveloper.common.exception.client;
 
-import es.abelfgdeveloper.common.exception.AbelfgdeveloperException;
+import es.abelfgdeveloper.common.exception.AbelfgDeveloperException;
 
-public class ValidationRequestException extends AbelfgdeveloperException {
+public class ValidationRequestException extends AbelfgDeveloperException {
 
   private static final long serialVersionUID = 1L;
   private static final int ERROR_STATUS_CODE = 400;

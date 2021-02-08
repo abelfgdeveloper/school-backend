@@ -3,7 +3,7 @@ package es.abelfgdeveloper.common.config.exception;
 import es.abelfgdeveloper.common.api.v1.resource.response.ErrorResponseResource;
 import es.abelfgdeveloper.common.api.v1.resource.response.ErrorResponseResource.ErrorResponseResourceBuilder;
 import es.abelfgdeveloper.common.config.exception.mapper.StackTraceMapper;
-import es.abelfgdeveloper.common.exception.AbelfgdeveloperException;
+import es.abelfgdeveloper.common.exception.AbelfgDeveloperException;
 import java.time.LocalDateTime;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,9 +20,9 @@ public class CommonExceptionHandler extends ResponseEntityExceptionHandler {
 
   private final StackTraceMapper stackTraceMapper;
 
-  @ExceptionHandler(AbelfgdeveloperException.class)
+  @ExceptionHandler(AbelfgDeveloperException.class)
   public ResponseEntity<ErrorResponseResource> abelfgdeveloperExceptionHandler(
-      AbelfgdeveloperException e) {
+      AbelfgDeveloperException e) {
     HttpStatus httpStatus = HttpStatus.valueOf(e.getErrorStatusCode());
     ErrorResponseResource body = generateErrorResponseResource(e, httpStatus);
     return new ResponseEntity<>(body, httpStatus);

@@ -1,11 +1,11 @@
 package es.abelfgdeveloper.common.exception.server;
 
-import es.abelfgdeveloper.common.exception.AbelfgdeveloperException;
+import es.abelfgdeveloper.common.exception.AbelfgDeveloperException;
 
-public class InternalServerErrorException extends AbelfgdeveloperException {
+public class InternalServerErrorException extends AbelfgDeveloperException {
 
   private static final long serialVersionUID = 1L;
-  private static final int ERROR_STATUS_CODE = 400;
+  private static final int ERROR_STATUS_CODE = 500;
 
   public InternalServerErrorException(String message) {
     super(ERROR_STATUS_CODE, message);

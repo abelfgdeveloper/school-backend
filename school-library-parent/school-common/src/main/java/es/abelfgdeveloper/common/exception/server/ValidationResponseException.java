@@ -1,11 +1,11 @@
 package es.abelfgdeveloper.common.exception.server;
 
-import es.abelfgdeveloper.common.exception.AbelfgdeveloperException;
+import es.abelfgdeveloper.common.exception.AbelfgDeveloperException;
 
-public class ValidationResponseException extends AbelfgdeveloperException {
+public class ValidationResponseException extends AbelfgDeveloperException {
 
   private static final long serialVersionUID = 1L;
-  private static final int ERROR_STATUS_CODE = 400;
+  private static final int ERROR_STATUS_CODE = 500;
 
   public ValidationResponseException(String message) {
     super(ERROR_STATUS_CODE, message);

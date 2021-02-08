@@ -2,18 +2,18 @@ package es.abelfgdeveloper.common.exception;
 
 import lombok.Getter;
 
-public class AbelfgdeveloperException extends RuntimeException {
+public class AbelfgDeveloperException extends RuntimeException {
 
   private static final long serialVersionUID = 1L;
 
   @Getter private final int errorStatusCode;
 
-  protected AbelfgdeveloperException(int errorStatusCode, String message) {
+  protected AbelfgDeveloperException(int errorStatusCode, String message) {
     super(message);
     this.errorStatusCode = errorStatusCode;
   }
 
-  protected AbelfgdeveloperException(int errorStatusCode, String message, Throwable cause) {
+  protected AbelfgDeveloperException(int errorStatusCode, String message, Throwable cause) {
     super(message, cause);
     this.errorStatusCode = errorStatusCode;
   }
