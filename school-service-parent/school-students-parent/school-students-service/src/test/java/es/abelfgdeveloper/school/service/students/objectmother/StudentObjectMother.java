@@ -1,6 +1,7 @@
 package es.abelfgdeveloper.school.service.students.objectmother;
 
 import es.abelfgdeveloper.common.api.v1.resource.response.PaginationResponseResource;
+import es.abelfgdeveloper.common.domain.PaginationOut;
 import es.abelfgdeveloper.school.service.students.api.v1.resource.request.CreateStudentRequestResource;
 import es.abelfgdeveloper.school.service.students.api.v1.resource.request.UpdateStudentRequestResource;
 import es.abelfgdeveloper.school.service.students.api.v1.resource.response.StudentPaginatedResponseResource;
@@ -38,7 +39,10 @@ public class StudentObjectMother {
   }
 
   public static StudentPaginated getStudentPaginated() {
-    return StudentPaginated.builder().students(Arrays.asList(getStudent())).build();
+    return StudentPaginated.builder()
+        .pagination(PaginationOut.builder().build())
+        .students(Arrays.asList(getStudent()))
+        .build();
   }
 
   public static CreateStudentRequestResource getCreateStudentRequestResourceV1() {
