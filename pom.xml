@@ -34,7 +34,7 @@
     <!-- THRID PARTY PROPERTIES -->
     <spring-boot-admin.version>2.3.1</spring-boot-admin.version>
     <embedded-database-spring-test.version>1.6.1</embedded-database-spring-test.version>
-    <logbook.version>2.4.1</logbook.version>
+    <logbook.version>2.5.0</logbook.version>
     <cucumber.version>6.8.2</cucumber.version>
     <cucumber.reporting.version>3.0.4</cucumber.reporting.version>
 
