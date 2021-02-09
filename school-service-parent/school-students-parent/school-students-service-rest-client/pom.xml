@@ -20,7 +20,6 @@
     <dependency>
       <groupId>es.abelfgdeveloper.school.library</groupId>
       <artifactId>school-common</artifactId>
-      <version>${project.version}</version>
     </dependency>
   </dependencies>
 
