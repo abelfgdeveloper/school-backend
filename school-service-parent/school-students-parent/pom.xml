@@ -16,8 +16,9 @@
   <packaging>pom</packaging>
 
   <modules>
-    <module>school-students-service</module>
     <module>school-students-service-rest-dto</module>
+	<module>school-students-service</module>
+    <module>school-students-service-rest-client</module>
   </modules>
 
   <dependencyManagement>
