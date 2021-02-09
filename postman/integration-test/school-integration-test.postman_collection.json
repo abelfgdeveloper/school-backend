@@ -232,7 +232,7 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"var nextRequest = null;\r",
+									"var nextRequest = \"Delete Course By ID v1\";\r",
 									"var jsonResponse = pm.response.json();\r",
 									"var codeResponse = pm.response.code;\r",
 									"var errorCode = \"001001001\";\r",
@@ -246,7 +246,7 @@
 									"\r",
 									"if(expectedCodeResponse === codeResponse) {\r",
 									"\r",
-									"    pm.test(\"code include: \" + errorCode, function () {\r",
+									"    pm.test(\"code is: \" + errorCode, function () {\r",
 									"        pm.expect(jsonResponse.code).to.include(errorCode);\r",
 									"    });\r",
 									"\r",
@@ -294,7 +294,7 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"var nextRequest = \"Delete Student By ID v1\";\r",
+									"var nextRequest = \"Create Course v1\";\r",
 									"var jsonResponse = pm.response.json();\r",
 									"var codeResponse = pm.response.code;\r",
 									"var studentId = pm.environment.get(\"studentId\");\r",
@@ -415,6 +415,391 @@
 								"students",
 								"v1",
 								"{{studentId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "school-courses-service",
+			"item": [
+				{
+					"name": "Create Course v1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var nextRequest = \"Update Course v1\";\r",
+									"var jsonRequest = JSON.parse(pm.request.body.raw);\r",
+									"var jsonResponse = pm.response.json();\r",
+									"var codeResponse = pm.response.code;\r",
+									"var expectedCodeResponse = 201;\r",
+									"\r",
+									"pm.test(\"Status code is \" + expectedCodeResponse, function () {\r",
+									"    pm.expect(codeResponse).to.eql(expectedCodeResponse);\r",
+									"});\r",
+									"\r",
+									"if(expectedCodeResponse === codeResponse) {\r",
+									"    pm.environment.set(\"courseId\", jsonResponse.id);\r",
+									"    pm.environment.set(\"course\", JSON.stringify(jsonResponse));\r",
+									"\r",
+									"    pm.test(\"id is not null \", function () {\r",
+									"        pm.expect(jsonResponse.id).not.eql(null);\r",
+									"    });\r",
+									"\r",
+									"    pm.test(\"name is \" + jsonRequest.name, function () {\r",
+									"        pm.expect(jsonResponse.name).to.eql(jsonRequest.name);\r",
+									"    });\r",
+									"\r",
+									"    pm.test(\"createAt is not null \", function () {\r",
+									"        pm.expect(jsonResponse.createAt).not.eql(null);\r",
+									"    });\r",
+									"} else {\r",
+									"    nextRequest = null;\r",
+									"}\r",
+									"postman.setNextRequest(nextRequest);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"1º ESO\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{school-courses-service-url}}/courses/v1",
+							"host": [
+								"{{school-courses-service-url}}"
+							],
+							"path": [
+								"courses",
+								"v1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Course v1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var nextRequest = \"Find Course By ID v1\";\r",
+									"var jsonRequest = JSON.parse(pm.request.body.raw);\r",
+									"var jsonResponse = pm.response.json();\r",
+									"var codeResponse = pm.response.code;\r",
+									"var courseId = pm.environment.get(\"courseId\");\r",
+									"var course = JSON.parse(pm.environment.get(\"course\"));\r",
+									"var expectedCodeResponse = 200;\r",
+									"\r",
+									"pm.test(\"Status code is \" + expectedCodeResponse, function () {\r",
+									"    pm.expect(codeResponse).to.eql(expectedCodeResponse);\r",
+									"});\r",
+									"\r",
+									"if(expectedCodeResponse === codeResponse) {\r",
+									"    pm.environment.set(\"course\", JSON.stringify(jsonResponse));\r",
+									"    pm.test(\"id is \" + courseId, function () {\r",
+									"        pm.expect(jsonResponse.id).to.eql(courseId);\r",
+									"    });\r",
+									"\r",
+									"    pm.test(\"name is \" + jsonRequest.name, function () {\r",
+									"        pm.expect(jsonResponse.name).to.eql(jsonRequest.name);\r",
+									"    });\r",
+									"\r",
+									"    pm.test(\"createAt is not null \", function () {\r",
+									"        pm.expect(jsonResponse.createAt).not.eql(null);\r",
+									"    });\r",
+									"} else {\r",
+									"    nextRequest = null;\r",
+									"}\r",
+									"postman.setNextRequest(nextRequest);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"2º ESO\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{school-courses-service-url}}/courses/v1/{{courseId}}",
+							"host": [
+								"{{school-courses-service-url}}"
+							],
+							"path": [
+								"courses",
+								"v1",
+								"{{courseId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find Course By ID v1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var nextRequest = \"Find All Courses v1\";\r",
+									"var jsonResponse = pm.response.json();\r",
+									"var codeResponse = pm.response.code;\r",
+									"var courseId = pm.environment.get(\"courseId\");\r",
+									"var course = JSON.parse(pm.environment.get(\"course\"));\r",
+									"var expectedCodeResponse = 200;\r",
+									"\r",
+									"pm.test(\"Status code is \" + expectedCodeResponse, function () {\r",
+									"    pm.expect(codeResponse).to.eql(expectedCodeResponse);\r",
+									"});\r",
+									"\r",
+									"if(expectedCodeResponse === codeResponse) {\r",
+									"    \r",
+									"    pm.test(\"id is \" + courseId, function () {\r",
+									"        pm.expect(jsonResponse.id).to.eql(courseId);\r",
+									"    });\r",
+									"\r",
+									"    pm.test(\"name is \" + course.name, function () {\r",
+									"        pm.expect(jsonResponse.name).to.eql(course.name);\r",
+									"    });\r",
+									"\r",
+									"    pm.test(\"createAt is not null \", function () {\r",
+									"        pm.expect(jsonResponse.createAt).not.eql(null);\r",
+									"    });\r",
+									"} else {\r",
+									"    nextRequest = null;\r",
+									"}\r",
+									"postman.setNextRequest(nextRequest);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{school-courses-service-url}}/courses/v1/{{courseId}}",
+							"host": [
+								"{{school-courses-service-url}}"
+							],
+							"path": [
+								"courses",
+								"v1",
+								"{{courseId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find Course By ID v1 - Not Found",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var nextRequest = null;\r",
+									"var jsonResponse = pm.response.json();\r",
+									"var codeResponse = pm.response.code;\r",
+									"var errorCode = \"001001001\";\r",
+									"var expectedCodeResponse = 404;\r",
+									"\r",
+									"pm.environment.unset(\"courseId\");\r",
+									"\r",
+									"pm.test(\"Status code is \" + expectedCodeResponse, function () {\r",
+									"    pm.expect(codeResponse).to.eql(expectedCodeResponse);\r",
+									"});\r",
+									"\r",
+									"if(expectedCodeResponse === codeResponse) {\r",
+									"\r",
+									"    pm.test(\"code is: \" + errorCode, function () {\r",
+									"        pm.expect(jsonResponse.code).to.include(errorCode);\r",
+									"    });\r",
+									"\r",
+									"} else {\r",
+									"    nextRequest = null;\r",
+									"}\r",
+									"postman.setNextRequest(nextRequest);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{school-courses-service-url}}/courses/v1/{{courseId}}",
+							"host": [
+								"{{school-courses-service-url}}"
+							],
+							"path": [
+								"courses",
+								"v1",
+								"{{courseId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find All Courses v1",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var course = JSON.parse(pm.environment.get(\"course\"));\r",
+									"pm.environment.set(\"courseName\", course.name);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var nextRequest = \"Delete Student By ID v1\";\r",
+									"var jsonResponse = pm.response.json();\r",
+									"var codeResponse = pm.response.code;\r",
+									"var courseId = pm.environment.get(\"courseId\");\r",
+									"var course = JSON.parse(pm.environment.get(\"course\"));\r",
+									"var expectedCodeResponse = 200;\r",
+									"\r",
+									"pm.environment.unset(\"courseName\");\r",
+									"\r",
+									"pm.test(\"Status code is \" + expectedCodeResponse, function () {\r",
+									"    pm.expect(codeResponse).to.eql(expectedCodeResponse);\r",
+									"});\r",
+									"\r",
+									"if(expectedCodeResponse === codeResponse) {\r",
+									"    \r",
+									"    pm.test(\"courses size is \" + 1, function () {\r",
+									"        pm.expect(jsonResponse.courses.length).to.eql(1);\r",
+									"    });\r",
+									"\r",
+									"    pm.test(\"id is \" + courseId, function () {\r",
+									"        pm.expect(jsonResponse.courses[0].id).to.eql(courseId);\r",
+									"    });\r",
+									"\r",
+									"    pm.test(\"name is \" + course.name, function () {\r",
+									"        pm.expect(jsonResponse.courses[0].name).to.eql(course.name);\r",
+									"    });\r",
+									"\r",
+									"    pm.test(\"createAt is not null \", function () {\r",
+									"        pm.expect(jsonResponse.courses[0].createAt).not.eql(null);\r",
+									"    });\r",
+									"} else {\r",
+									"    nextRequest = null;\r",
+									"}\r",
+									"postman.setNextRequest(nextRequest);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{school-courses-service-url}}/courses/v1?query={{courseName}}",
+							"host": [
+								"{{school-courses-service-url}}"
+							],
+							"path": [
+								"courses",
+								"v1"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "size",
+									"value": "10",
+									"disabled": true
+								},
+								{
+									"key": "query",
+									"value": "{{courseName}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Course By ID v1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var nextRequest = \"Find Course By ID v1 - Not Found\";\r",
+									"var codeResponse = pm.response.code;\r",
+									"var expectedCodeResponse = 204;\r",
+									"\r",
+									"pm.environment.unset(\"course\");\r",
+									"\r",
+									"pm.test(\"Status code is \" + expectedCodeResponse, function () {\r",
+									"    pm.expect(codeResponse).to.eql(expectedCodeResponse);\r",
+									"});\r",
+									"\r",
+									"if(expectedCodeResponse === codeResponse) {\r",
+									"    \r",
+									"} else {\r",
+									"    nextRequest = null;\r",
+									"}\r",
+									"postman.setNextRequest(nextRequest);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{school-courses-service-url}}/courses/v1/{{courseId}}",
+							"host": [
+								"{{school-courses-service-url}}"
+							],
+							"path": [
+								"courses",
+								"v1",
+								"{{courseId}}"
 							]
 						}
 					},

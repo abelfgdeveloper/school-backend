@@ -20,6 +20,12 @@ public class DefaultRouteRepositoryService implements RouteRepositoryService {
             .microservice("school-students-service")
             .path("students")
             .build());
+    routes.add(
+        RouteData.builder()
+            .application(SCHOOL_APPLICATION)
+            .microservice("school-courses-service")
+            .path("courses")
+            .build());
     return routes;
   }
 }

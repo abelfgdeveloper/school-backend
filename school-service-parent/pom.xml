@@ -17,6 +17,7 @@
 
   <modules>
 	<module>school-students-parent</module>
+	<module>school-courses-parent</module>
   </modules>
 
 </project>
