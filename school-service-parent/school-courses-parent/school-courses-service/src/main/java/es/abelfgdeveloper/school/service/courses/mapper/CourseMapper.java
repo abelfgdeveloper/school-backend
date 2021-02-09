@@ -11,6 +11,7 @@ public class CourseMapper {
     return CourseEntity.builder()
         .id(course.getId())
         .name(course.getName())
+        .students(course.getStudents())
         .createAt(course.getCreateAt())
         .build();
   }
@@ -20,6 +21,7 @@ public class CourseMapper {
         .id(course.getId())
         .name(course.getName())
         .createAt(course.getCreateAt())
+        .students(course.getStudents())
         .build();
   }
 }

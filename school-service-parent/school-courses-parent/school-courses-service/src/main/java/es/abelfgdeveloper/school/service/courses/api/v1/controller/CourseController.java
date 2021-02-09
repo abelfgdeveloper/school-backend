@@ -11,11 +11,17 @@ import es.abelfgdeveloper.school.service.courses.api.v1.validator.CoursePaginate
 import es.abelfgdeveloper.school.service.courses.api.v1.validator.CourseResponseResourceValidator;
 import es.abelfgdeveloper.school.service.courses.api.v1.validator.CreateCourseRequestResourceValidator;
 import es.abelfgdeveloper.school.service.courses.api.v1.validator.UpdateCourseRequestResourceValidator;
+import es.abelfgdeveloper.school.service.courses.domain.Course;
+import es.abelfgdeveloper.school.service.courses.usecase.v1.AddStudentToCourseUseCase;
 import es.abelfgdeveloper.school.service.courses.usecase.v1.CreateCourseUseCase;
 import es.abelfgdeveloper.school.service.courses.usecase.v1.DeleteCourseByIdUseCase;
 import es.abelfgdeveloper.school.service.courses.usecase.v1.FindCourseByIdUseCase;
+import es.abelfgdeveloper.school.service.courses.usecase.v1.FindCoursesByStudentIdUseCase;
 import es.abelfgdeveloper.school.service.courses.usecase.v1.FindCoursesPaginatedUseCase;
+import es.abelfgdeveloper.school.service.courses.usecase.v1.RemoveStudentFromCourseUseCase;
 import es.abelfgdeveloper.school.service.courses.usecase.v1.UpdateCourseUseCase;
+import java.util.ArrayList;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -28,6 +34,9 @@ public class CourseController implements CourseApi {
   private final DeleteCourseByIdUseCase deleteCourseByIdUseCase;
   private final FindCourseByIdUseCase findCourseByIdUseCase;
   private final FindCoursesPaginatedUseCase findCoursesPaginatedUseCase;
+  private final AddStudentToCourseUseCase addStudentToCourseUseCase;
+  private final RemoveStudentFromCourseUseCase removeStudentFromCourseUseCase;
+  private final FindCoursesByStudentIdUseCase findCoursesByStudentIdUseCase;
 
   private final CreateCourseRequestResourceValidator createCourseRequestResourceValidator;
   private final UpdateCourseRequestResourceValidator updateCourseRequestResourceValidator;
@@ -73,6 +82,34 @@ public class CourseController implements CourseApi {
         courseMapper.map(
             findCoursesPaginatedUseCase.execute(paginationMapper.map(page, size), query));
     coursePaginatedResponseResourceValidator.validate(response);
+    return response;
+  }
+
+  @Override
+  public CourseResponseResource addStudent(String courseId, String studentId) {
+    CourseResponseResource response =
+        courseMapper.map(addStudentToCourseUseCase.execute(courseId, studentId));
+    courseResponseResourceValidator.validate(response);
+    return response;
+  }
+
+  @Override
+  public CourseResponseResource removeStudent(String courseId, String studentId) {
+    CourseResponseResource response =
+        courseMapper.map(removeStudentFromCourseUseCase.execute(courseId, studentId));
+    courseResponseResourceValidator.validate(response);
+    return response;
+  }
+
+  @Override
+  public List<CourseResponseResource> findCoursesByStudentId(String studentId) {
+    List<Course> courses = findCoursesByStudentIdUseCase.execute(studentId);
+    List<CourseResponseResource> response = new ArrayList<>();
+    for (Course course : courses) {
+      CourseResponseResource courseResponse = courseMapper.map(course);
+      courseResponseResourceValidator.validate(courseResponse);
+      response.add(courseResponse);
+    }
     return response;
   }
 }

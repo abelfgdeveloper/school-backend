@@ -1,10 +1,14 @@
 package es.abelfgdeveloper.school.service.courses.model.entity;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -33,6 +37,11 @@ public class CourseEntity {
 
   @Column(name = "create_at")
   private LocalDateTime createAt;
+
+  @ElementCollection
+  @CollectionTable(name = "courses_students", joinColumns = @JoinColumn(name = "course_id"))
+  @Column(name = "student_id")
+  private List<String> students;
 
   @PrePersist
   public void prePersist() {

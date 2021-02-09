@@ -23,4 +23,7 @@ public class CourseErrorCodes {
   public static final String RESPONSE_BODY_NOT_NULL = SCHOOL_COURSES_SERVICE_ERROR_CODE + "009";
   public static final String PAGINATED_RESPONSE_BODY_NOT_NULL =
       SCHOOL_COURSES_SERVICE_ERROR_CODE + "010";
+
+  public static final String STUDENT_ID_EXIST = SCHOOL_COURSES_SERVICE_ERROR_CODE + "011";
+  public static final String STUDENT_ID_NOT_EXIST = SCHOOL_COURSES_SERVICE_ERROR_CODE + "011";
 }

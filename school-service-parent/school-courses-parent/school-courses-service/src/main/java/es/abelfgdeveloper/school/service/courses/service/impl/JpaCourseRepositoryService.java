@@ -11,6 +11,7 @@ import es.abelfgdeveloper.school.service.courses.model.repository.CourseSpringDa
 import es.abelfgdeveloper.school.service.courses.model.repository.specification.CourseSpecification;
 import es.abelfgdeveloper.school.service.courses.service.CourseRepositoryService;
 import es.abelfgdeveloper.school.service.courses.util.CourseErrorCodes;
+import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
@@ -77,6 +78,15 @@ public class JpaCourseRepositoryService implements CourseRepositoryService {
     } else {
       return Optional.empty();
     }
+  }
+
+  @Override
+  public List<Course> findByStudentId(String studentId) {
+    return courseRepository
+        .findByStudentId(studentId)
+        .stream()
+        .map(courseMapper::map)
+        .collect(Collectors.toList());
   }
 
   private CourseEntity create(Course course) {

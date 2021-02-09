@@ -29,6 +29,7 @@ public class CourseMapper {
     return CourseResponseResource.builder()
         .id(course.getId())
         .name(course.getName())
+        .students(course.getStudents())
         .createAt(course.getCreateAt())
         .build();
   }

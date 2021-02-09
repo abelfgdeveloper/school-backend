@@ -26,6 +26,11 @@
       <groupId>es.abelfgdeveloper.school.service.courses</groupId>
       <artifactId>school-courses-service-rest-dto</artifactId>
     </dependency>
+    <dependency>
+      <groupId>es.abelfgdeveloper.school.service.students</groupId>
+      <artifactId>school-students-service-rest-client</artifactId>
+      <version>${project.version}</version>
+    </dependency>
 
     <!-- TESTS DEPENDENCIES -->
     <dependency>

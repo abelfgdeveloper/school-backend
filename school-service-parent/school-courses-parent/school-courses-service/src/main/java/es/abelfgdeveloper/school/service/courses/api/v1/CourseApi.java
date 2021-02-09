@@ -4,6 +4,7 @@ import es.abelfgdeveloper.school.service.courses.api.v1.resource.request.CreateC
 import es.abelfgdeveloper.school.service.courses.api.v1.resource.request.UpdateCourseRequestResource;
 import es.abelfgdeveloper.school.service.courses.api.v1.resource.response.CoursePaginatedResponseResource;
 import es.abelfgdeveloper.school.service.courses.api.v1.resource.response.CourseResponseResource;
+import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,4 +40,19 @@ public interface CourseApi {
       @RequestParam(name = "page", required = false) Integer page,
       @RequestParam(name = "size", required = false) Integer size,
       @RequestParam(name = "query", required = false) String query);
+
+  @PutMapping("/courses/v1/{courseId}/students/{studentId}")
+  @ResponseStatus(HttpStatus.OK)
+  public CourseResponseResource addStudent(
+      @PathVariable("courseId") String courseId, @PathVariable("studentId") String studentId);
+
+  @DeleteMapping("/courses/v1/{courseId}/students/{studentId}")
+  @ResponseStatus(HttpStatus.OK)
+  public CourseResponseResource removeStudent(
+      @PathVariable("courseId") String courseId, @PathVariable("studentId") String studentId);
+
+  @GetMapping("/courses/v1/students/{studentId}")
+  @ResponseStatus(HttpStatus.OK)
+  public List<CourseResponseResource> findCoursesByStudentId(
+      @PathVariable("studentId") String studentId);
 }

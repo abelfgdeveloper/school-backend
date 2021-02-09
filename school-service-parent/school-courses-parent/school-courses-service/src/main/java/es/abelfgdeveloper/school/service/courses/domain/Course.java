@@ -1,6 +1,7 @@
 package es.abelfgdeveloper.school.service.courses.domain;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -21,4 +22,5 @@ public class Course {
   @EqualsAndHashCode.Include private String id;
   private String name;
   private LocalDateTime createAt;
+  private List<String> students;
 }
