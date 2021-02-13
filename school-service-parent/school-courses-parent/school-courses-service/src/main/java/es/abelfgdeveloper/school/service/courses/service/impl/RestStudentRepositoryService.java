@@ -24,6 +24,6 @@ public class RestStudentRepositoryService implements StudentRepositoryService {
       log.warn("Error when call to studentsClient.findById");
       return false;
     }
-    return (response != null && response.getId() != null && response.getId().equals(id));
+    return true;
   }
 }

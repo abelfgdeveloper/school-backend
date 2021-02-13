@@ -1,0 +1,9 @@
+spring:
+  main:
+    allow-bean-definition-overriding: true
+    
+es:
+  abelfgdeveloper:
+    service:
+      school:
+        students: http://localhost:8079

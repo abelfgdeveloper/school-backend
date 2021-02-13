@@ -14,5 +14,9 @@
   <artifactId>school-test</artifactId>
 
   <dependencies>
+    <dependency>
+    <groupId>es.abelfgdeveloper.school.library</groupId>
+    <artifactId>school-common</artifactId>
+    </dependency>
   </dependencies>
 </project>
