@@ -15,7 +15,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"1º ESO\"\r\n}",
+							"raw": "{\r\n    \"name\": \"Test Course\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -131,6 +131,68 @@
 								"courses",
 								"v1",
 								"8cdc20ef-d0c3-4d0e-832e-5abdd26f2fd5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Student to Course",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{school-courses-service-url}}/courses/v1/57a24bec-3082-4599-8e91-cdf158a49a28/students/68b18b6a-ff3d-4c2a-bf87-25b2586d1487",
+							"host": [
+								"{{school-courses-service-url}}"
+							],
+							"path": [
+								"courses",
+								"v1",
+								"57a24bec-3082-4599-8e91-cdf158a49a28",
+								"students",
+								"68b18b6a-ff3d-4c2a-bf87-25b2586d1487"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove Student from Course",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{school-courses-service-url}}/courses/v1/57a24bec-3082-4599-8e91-cdf158a49a28/students/68b18b6a-ff3d-4c2a-bf87-25b2586d1487",
+							"host": [
+								"{{school-courses-service-url}}"
+							],
+							"path": [
+								"courses",
+								"v1",
+								"57a24bec-3082-4599-8e91-cdf158a49a28",
+								"students",
+								"68b18b6a-ff3d-4c2a-bf87-25b2586d1487"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find Courses By Student ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{school-courses-service-url}}/courses/v1/students/68b18b6a-ff3d-4c2a-bf87-25b2586d1487",
+							"host": [
+								"{{school-courses-service-url}}"
+							],
+							"path": [
+								"courses",
+								"v1",
+								"students",
+								"68b18b6a-ff3d-4c2a-bf87-25b2586d1487"
 							]
 						}
 					},

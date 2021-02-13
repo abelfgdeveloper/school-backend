@@ -27,8 +27,8 @@
 
     <!-- TESTS DEPENDENCIES -->
     <dependency>
-      <groupId>es.abelfgdeveloper.school.starter</groupId>
-      <artifactId>school-test-starter</artifactId>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
       <scope>test</scope>
     </dependency>
   </dependencies>
