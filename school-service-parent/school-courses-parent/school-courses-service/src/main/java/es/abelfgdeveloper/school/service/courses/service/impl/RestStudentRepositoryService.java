@@ -1,7 +1,6 @@
 package es.abelfgdeveloper.school.service.courses.service.impl;
 
 import es.abelfgdeveloper.school.service.courses.service.StudentRepositoryService;
-import es.abelfgdeveloper.school.service.students.api.v1.resource.response.StudentResponseResource;
 import es.abelfgdeveloper.school.service.students.client.v1.StudentsClient;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -17,9 +16,10 @@ public class RestStudentRepositoryService implements StudentRepositoryService {
 
   @Override
   public boolean checkIfStudentExist(String id) {
-    StudentResponseResource response = null;
     try {
-      response = studentsClient.findById(id);
+      log.info("Try call to studentsClient.findById");
+      studentsClient.findById(id);
+      log.info("Success call to studentsClient.findById");
     } catch (HttpClientErrorException e) {
       log.warn("Error when call to studentsClient.findById");
       return false;
